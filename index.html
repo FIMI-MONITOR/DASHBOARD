@@ -1076,6 +1076,13 @@
     'תעמולה': 'Propaganda',
     'אנטישמיות': 'Antisemitism',
     'דה-לגיטימציה': 'Delegitimization',
+    'מקומי': 'Local',
+    'מקומי - ישראל': 'Local - Israel',
+    'מקומי-ישראל': 'Local - Israel',
+    'גלובלי': 'Global',
+    'אזורי': 'Regional',
+    'בינלאומי - ישראל': 'International - Israel',
+
     
     // Platforms
     'טוויטר': 'Twitter',
@@ -1100,6 +1107,14 @@
     'רשתות חברתיות': 'Social Media',
     'תקשורת ממסדית': 'Mainstream Media',
     'עיתונות': 'Press',
+    'צ\'אט בוטים': 'Chatbots',
+    'צ׳אט בוטים': 'Chatbots',
+    'צאט בוטים': 'Chatbots',
+    'בוטים': 'Bots',
+    'אתרי חדשות': 'News Websites',
+    'אפליקציות מסרים': 'Messaging Apps',
+    'מסרים מיידיים': 'Instant Messaging',
+
     
     // Misc
     'כן': 'Yes', 'לא': 'No',
@@ -1125,13 +1140,44 @@
     if (!val) return val;
     const v = String(val).trim();
     if (currentLang === 'en') {
-      return VALUES[v] || v;
+      if (VALUES[v]) return VALUES[v];
+
+      // Translate simple compound taxonomy values when every component is known.
+      const parts = v.split(/\s+-\s+/);
+      if(parts.length > 1){
+        const translated = parts.map(part => VALUES[part] || part);
+        if(translated.every((part,i) => part !== parts[i] || !containsHebrew(parts[i]))){
+          return translated.join(' - ');
+        }
+      }
+      return v;
     }
     return v;
   }
 
+  const TITLE_TRANSLATIONS = {
+    'ראיון עם ממלא מקום מנכ״ל ועדת הבחירות המרכזית': 'Interview with the Acting Director General of the Central Elections Committee',
+    'ראיון עם ממלא מקום מנכ"ל ועדת הבחירות המרכזית': 'Interview with the Acting Director General of the Central Elections Committee'
+  };
+
+  function containsHebrew(value){
+    return /[\u0590-\u05FF]/.test(String(value || ''));
+  }
+
   function displayTitle(row) {
-    if (currentLang === 'en') return row.title_en || row.title_he || '';
+    if (currentLang === 'en') {
+      const en = String(row.title_en || '').trim();
+      if(en && !containsHebrew(en)) return en;
+
+      const he = String(row.title_he || en || '').trim();
+      if(he && TITLE_TRANSLATIONS[he]) return TITLE_TRANSLATIONS[he];
+
+      const summaryEn = String(row.summary_en || '').trim();
+      if(summaryEn && !containsHebrew(summaryEn)) return summaryEn;
+
+      // Never leave a Hebrew title visible in the English interface.
+      return 'View source item';
+    }
     return row.title_he || row.title_en || '';
   }
 
@@ -1269,8 +1315,8 @@
 
   const KEYMAP = {
     date:       ['תאריך','date','Date'],
-    title_en:   ['כותרת באנגלית','English title','English Title','Title English','Title_en','title_en','title','Title','כותרת'],
-    title_he:   ['כותרת בעברית','title_he','Title_he'],
+    title_en:   ['כותרת באנגלית','English title','English Title','Title English','Title_en','title_en','title','Title'],
+    title_he:   ['כותרת בעברית','title_he','Title_he','כותרת'],
     summary_en: ['תיאור קצר','summary_en','Summary'],
     summary_he: ['תרגום לעברית','summary_he','Translation_he'],
     attacker:   ['הגוף התוקף','attacker','Attacker'],
