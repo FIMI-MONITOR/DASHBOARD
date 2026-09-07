@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="he" dir="rtl">
+<html lang="en" dir="ltr">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -356,6 +356,139 @@
 
 
     html.guide-open,html.guide-open body{overflow:hidden!important}
+
+
+    /* ===== FIMI MONITOR 2.0: Election Trust-inspired exploration tools ===== */
+    .chart-tools{display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+    .chart-tool-btn{width:32px;height:32px;display:inline-flex;align-items:center;justify-content:center;border:1px solid #dedede;background:#fff;border-radius:9px;color:var(--ink);cursor:pointer;font-size:14px;line-height:1;transition:.15s ease}
+    .chart-tool-btn:hover{background:var(--accent-soft);border-color:#f3c4ac}
+    .chart-tool-btn.active{background:var(--accent-lime);border-color:#b7d969;font-weight:800}
+    .chart-data-table{display:none;margin-top:.45rem;border:1px solid #ececec;border-radius:14px;overflow:hidden;background:#fff}
+    .chart-data-table.active{display:block}
+    .chart-data-row{display:grid;grid-template-columns:minmax(0,1fr) auto auto;gap:10px;align-items:center;padding:.58rem .7rem;border-bottom:1px solid #f0f1f2;font-size:.86rem;cursor:pointer}
+    .chart-data-row:last-child{border-bottom:0}
+    .chart-data-row:hover{background:#fafbf8}
+    .chart-data-row.head{background:#f6f7f5;color:#657080;font-size:.75rem;font-weight:800;cursor:default}
+    .chart-data-label{min-width:0;overflow-wrap:anywhere;font-weight:700}
+    .chart-data-value{font-variant-numeric:tabular-nums;font-weight:800}
+    .chart-data-pct{min-width:48px;text-align:end;color:#6b7280;font-variant-numeric:tabular-nums}
+    .chart-card-fullscreen-backdrop{display:none;position:fixed;inset:0;z-index:8998;background:rgba(31,41,55,.45);backdrop-filter:blur(2px)}
+    .chart-card-fullscreen-backdrop.open{display:block}
+    .card.chart-fullscreen{position:fixed!important;inset:24px!important;z-index:8999!important;margin:0!important;padding:22px!important;overflow:auto!important;background:#fff!important;display:flex!important;flex-direction:column!important}
+    .card.chart-fullscreen .chart-fixed{flex:1 1 auto;height:auto!important;min-height:420px}
+    .card.chart-fullscreen .chart-data-table{max-width:760px;width:100%;margin:.75rem auto 0}
+
+    .map-view-tools{display:flex;gap:6px;align-items:center;flex-wrap:wrap}
+    .map-view-btn{border:1px solid #dedede;background:#fff;border-radius:9px;padding:.42rem .65rem;font-size:.8rem;font-weight:700;cursor:pointer}
+    .map-view-btn.active{background:var(--accent-lime);border-color:#b7d969}
+    .map-relations-wrap{display:none;border:1px solid #ececec;border-radius:16px;overflow:hidden;background:#fff;margin-top:.55rem}
+    .map-relations-wrap.active{display:block}
+    .map-relations-wrap table{width:100%;border-collapse:collapse;font-size:.86rem}
+    .map-relations-wrap th{background:#f6f7f5;color:#657080;padding:.65rem .75rem;text-align:start}
+    .map-relations-wrap td{padding:.65rem .75rem;border-top:1px solid #f0f1f2;vertical-align:top}
+    .map-relations-wrap tbody tr{cursor:pointer}
+    .map-relations-wrap tbody tr:hover{background:#fafbf8}
+    .map-relations-count{font-weight:800;font-variant-numeric:tabular-nums}
+
+    #selectionToast{position:fixed;left:50%;bottom:20px;transform:translate(-50%,18px);opacity:0;pointer-events:none;z-index:9100;background:#fff;border:1px solid #e5e7eb;border-top:4px solid var(--accent-orange);box-shadow:0 16px 38px rgba(48,48,48,.16);border-radius:16px;padding:.75rem .9rem;display:flex;align-items:center;gap:.8rem;max-width:min(92vw,620px);transition:.2s ease}
+    #selectionToast.open{opacity:1;transform:translate(-50%,0);pointer-events:auto}
+    .selection-toast-text{min-width:0;display:flex;flex-direction:column;line-height:1.25}
+    .selection-toast-text strong{font-size:.9rem;overflow-wrap:anywhere}
+    .selection-toast-text span{font-size:.76rem;color:var(--muted);margin-top:3px}
+    .selection-toast-actions{display:flex;gap:6px;flex:0 0 auto}
+    .selection-toast-actions button{border:1px solid #dedede;background:#fff;border-radius:8px;padding:.4rem .58rem;font-size:.76rem;font-weight:700;white-space:nowrap}
+    .selection-toast-actions .primary{background:var(--accent-orange);border-color:var(--accent-orange);color:#fff}
+
+    @media(max-width:700px){
+      .chart-tools .btn-save{display:none!important}
+      .chart-tool-btn{width:34px;height:34px}
+      .card.chart-fullscreen{inset:0!important;border-radius:0!important;padding:14px!important}
+      .chart-data-row{grid-template-columns:minmax(0,1fr) auto auto;font-size:.82rem;padding:.62rem .6rem}
+      .chart-data-row.head{font-size:.72rem}
+      .map-relations-wrap{overflow:visible;border:0;background:transparent}
+      .map-relations-wrap table,.map-relations-wrap tbody{display:block}
+      .map-relations-wrap thead{display:none}
+      .map-relations-wrap tr{display:grid;grid-template-columns:1fr auto;gap:.25rem .7rem;background:#fff;border:1px solid #e8e8e8;border-radius:13px;padding:.65rem .7rem;margin:.5rem 0}
+      .map-relations-wrap td{display:block;border:0;padding:0!important}
+      .map-relations-wrap td:nth-child(1)::before{content:attr(data-label);display:block;font-size:.68rem;color:#7b8491;font-weight:700}
+      .map-relations-wrap td:nth-child(2)::before{content:attr(data-label);display:block;font-size:.68rem;color:#7b8491;font-weight:700}
+      .map-relations-wrap td:nth-child(3){grid-column:2;grid-row:1 / span 2;align-self:center;text-align:center;min-width:54px}
+      #selectionToast{bottom:max(12px,env(safe-area-inset-bottom));width:calc(100vw - 24px);max-width:none;flex-wrap:wrap}
+      .selection-toast-text{flex:1 1 180px}
+      .selection-toast-actions{margin-inline-start:auto}
+    }
+
+
+    /* Compact event register inspired by Election Trust */
+    #eventsTableSection .events-compact-table{table-layout:auto!important;min-width:760px!important}
+    #eventsTableSection .evt-main-row td{vertical-align:middle}
+    #eventsTableSection .evt-main-title{min-width:280px;line-height:1.5}
+    #eventsTableSection .evt-main-actions{width:180px;white-space:nowrap}
+    .evt-action-stack{display:flex;gap:7px;align-items:center;justify-content:flex-start;flex-wrap:wrap}
+    .evt-share-btn{border:1px solid #25d366;background:#25d366;color:#fff;border-radius:8px;padding:6px 10px;font-size:12px;font-weight:700;cursor:pointer;white-space:nowrap}
+    .evt-share-btn:hover{background:#1ebd5a;border-color:#1ebd5a}
+    .evt-details-btn{border:1px solid #d8dee8;background:#fff;color:var(--ink);border-radius:8px;padding:6px 10px;font-size:12px;font-weight:700;cursor:pointer;white-space:nowrap}
+    .evt-details-btn:hover{background:#f8fafc}
+    .evt-details-row{display:none}
+    .evt-details-row.open{display:table-row}
+    .evt-detail-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px 18px;padding:12px 4px;font-size:12.5px;color:#475569}
+    .evt-detail-grid strong{display:block;color:var(--ink);margin-bottom:2px}
+    .evt-detail-grid .wide{grid-column:1/-1}
+    @media(max-width:700px){
+      #eventsTableSection .events-compact-table{display:block!important;min-width:0!important;width:100%!important}
+      #eventsTableSection .events-compact-table thead{display:none!important}
+      #eventsTableSection .events-compact-table tbody{display:block!important}
+      #eventsTableSection .evt-main-row{display:block!important;border:1px solid #e5e7eb!important;border-radius:15px!important;margin:.75rem 0 0!important;padding:.7rem .8rem!important;background:#fff!important}
+      #eventsTableSection .evt-main-row td{display:block!important;width:100%!important;padding:.22rem 0!important;border:0!important}
+      #eventsTableSection .evt-main-row .evt-main-date{font-size:.78rem;color:#64748b;margin-bottom:.18rem}
+      #eventsTableSection .evt-main-row .evt-main-title{font-size:.98rem;min-width:0;line-height:1.45}
+      #eventsTableSection .evt-main-row .evt-main-actions{margin-top:.55rem}
+      #eventsTableSection .evt-details-row{display:none!important}
+      #eventsTableSection .evt-details-row.open{display:block!important;border:1px solid #e5e7eb;border-top:0;border-radius:0 0 15px 15px;margin:0 0 .75rem;background:#fbfcfd;padding:.45rem .8rem .7rem}
+      #eventsTableSection .evt-details-row td{display:block!important;padding:0!important;border:0!important}
+      .evt-detail-grid{grid-template-columns:1fr;gap:8px;padding:8px 0 0}
+      .evt-action-stack{justify-content:flex-start}
+    }
+
+
+    /* Integrated full-page guide: normal page scrolling, no dialog/iframe/external HTML. */
+    .integrated-guide{display:none;min-height:100vh;background:var(--bg);color:var(--ink)}
+    body.guide-mode .integrated-guide{display:block}
+    body.guide-mode > header.sticky,
+    body.guide-mode > main{display:none!important}
+    .integrated-guide-header{position:sticky;top:0;z-index:100;background:rgba(255,255,255,.96);backdrop-filter:blur(8px);border-bottom:1px solid #e7e7e7}
+    .integrated-guide-header-inner{max-width:980px;margin:auto;padding:11px 18px;display:flex;align-items:center;justify-content:space-between;gap:14px}
+    .integrated-guide-brand .brand-lockup-title{font-size:20px}
+    .integrated-guide-brand .brand-lockup-sub{font-size:10px;letter-spacing:.22em;margin-top:4px}
+    .integrated-guide-actions{display:flex;align-items:center;gap:8px}
+    .integrated-guide-back{font:inherit;border:1px solid #ddd;background:#fff;border-radius:9px;padding:7px 11px;color:var(--ink);font-weight:700;cursor:pointer}
+    .integrated-guide-back:hover{background:#fff7f2;border-color:#f3c4ac}
+    .integrated-guide-main{max-width:980px;margin:auto;padding:28px 18px 54px}
+    .integrated-guide-hero{background:#fff;border:1px solid #e9e9e9;border-radius:24px;padding:24px;box-shadow:0 8px 24px rgba(48,48,48,.05);margin-bottom:18px;position:relative;overflow:hidden}
+    .integrated-guide-hero::after{content:'';position:absolute;width:140px;height:140px;border-radius:50%;background:rgba(214,184,249,.18);left:-45px;bottom:-65px;pointer-events:none}
+    .integrated-guide-hero h1{position:relative;z-index:1;margin:0;font-size:clamp(1.8rem,5vw,2.6rem);font-weight:800}
+    .integrated-guide-hero p{position:relative;z-index:1;color:var(--muted);margin:.5rem 0 0;max-width:760px;line-height:1.75}
+    .integrated-guide-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+    .integrated-guide-step{background:#fff;border:1px solid #e9e9e9;border-radius:20px;padding:20px;position:relative;overflow:hidden}
+    .integrated-guide-step:nth-child(3n+1){border-top:4px solid var(--accent-orange)}
+    .integrated-guide-step:nth-child(3n+2){border-top:4px solid var(--accent-lilac)}
+    .integrated-guide-step:nth-child(3n){border-top:4px solid var(--accent-lime)}
+    .integrated-guide-step h2{margin:0 0 7px;font-size:1.08rem;font-weight:800}
+    .integrated-guide-step p{margin:0;color:#5f6672;line-height:1.7}
+    .integrated-guide-tip{margin-top:16px;background:var(--accent-soft);border:1px solid #f7d5c5;border-radius:16px;padding:14px 16px;font-weight:500;line-height:1.65}
+    html[dir="ltr"] .integrated-guide-main{text-align:left}
+    @media(max-width:650px){
+      .integrated-guide-header-inner{padding:10px 12px;align-items:center;gap:8px}
+      .integrated-guide-brand .brand-lockup-title{font-size:16px}
+      .integrated-guide-brand .brand-lockup-sub{font-size:8px;letter-spacing:.16em}
+      .integrated-guide-actions{gap:5px}
+      .integrated-guide-back{font-size:12px;padding:6px 8px}
+      .integrated-guide-main{padding:18px 12px max(38px,env(safe-area-inset-bottom))}
+      .integrated-guide-grid{grid-template-columns:1fr}
+      .integrated-guide-hero{padding:19px;border-radius:20px}
+      .integrated-guide-step{padding:17px;border-radius:17px}
+    }
+
   </style>
 </head>
 <body class="min-h-screen data-loading">
@@ -383,8 +516,8 @@
       </div>
       <div class="header-actions flex items-center gap-2 text-sm flex-wrap justify-end">
         <div class="lang-toggle ml-2 rtl:ml-2 ltr:mr-2">
-          <button id="langHeBtn" class="lang-btn active">HE</button>
-          <button id="langEnBtn" class="lang-btn">EN</button>
+          <button id="langHeBtn" class="lang-btn">HE</button>
+          <button id="langEnBtn" class="lang-btn active">EN</button>
         </div>
         <button id="guideBtn" class="px-3 py-1.5 rounded-md guide-btn" type="button" data-i18n="guide_button">📖 מדריך שימוש</button>
         <button id="toggleFiltersBtn"
@@ -667,16 +800,12 @@
         </div>
       </div>
       <div class="overflow-x-auto mt-2">
-        <table class="min-w-full text-sm">
+        <table class="min-w-full text-sm events-compact-table">
           <thead class="bg-slate-50 text-slate-600">
             <tr>
-              <th class="text-start p-2 evt-date" data-i18n="th_date">תאריך</th>
-              <th class="text-start p-2 evt-title" data-i18n="th_title_src">כותרת ומקור</th>
-              <th class="text-start p-2 evt-actor" data-i18n="th_actor">התוקף</th>
-              <th class="text-start p-2 evt-target" data-i18n="th_target">המותקף</th>
-              <th class="text-start p-2 evt-platforms" data-i18n="th_platforms">פלטפורמות</th>
-              <th class="text-center p-2 evt-ai">AI</th>
-              <th class="text-center p-2 evt-elections" data-i18n="th_elections">בחירות</th>
+              <th class="text-start p-2" data-i18n="th_date">תאריך</th>
+              <th class="text-start p-2" data-i18n="th_title_src">כותרת ומקור</th>
+              <th class="text-start p-2">שיתוף ופרטים</th>
             </tr>
           </thead>
           <tbody id="tableBody"></tbody>
@@ -693,45 +822,46 @@
     </section>
   </main>
 
-  <!-- Usage Guide -->
-  <dialog id="guideDialog" class="guide-dialog">
-    <div class="guide-head">
-      <div>
-        <h2 data-i18n="guide_title">מדריך שימוש בדשבורד</h2>
+  <!-- Integrated full-page usage guide. Kept inside this HTML so GitHub needs only one file. -->
+  <section id="guidePage" class="integrated-guide" aria-hidden="true">
+    <header class="integrated-guide-header">
+      <div class="integrated-guide-header-inner">
+        <div class="integrated-guide-brand" aria-label="FIMI MONITOR">
+          <div class="brand-lockup">
+            <div class="brand-lockup-text"><div class="brand-lockup-title">FIMI MONITOR</div><div class="brand-lockup-sub">FOREIGN INFLUENCE</div></div>
+          </div>
+        </div>
+        <div class="integrated-guide-actions">
+          <div class="lang-toggle">
+            <button id="guideLangHeBtn" class="lang-btn active" type="button">HE</button>
+            <button id="guideLangEnBtn" class="lang-btn" type="button">EN</button>
+          </div>
+          <button id="guideBackBtn" class="integrated-guide-back" type="button" data-i18n="guide_back">← חזרה לדשבורד</button>
+        </div>
+      </div>
+    </header>
+    <div class="integrated-guide-main">
+      <section class="integrated-guide-hero">
+        <h1 data-i18n="guide_title">מדריך שימוש ב-FIMI MONITOR</h1>
         <p data-i18n="guide_intro">כך אפשר לעבור במהירות מתמונת המצב אל האירועים עצמם.</p>
+      </section>
+      <div class="integrated-guide-grid">
+        <section class="integrated-guide-step"><h2 data-i18n="guide_kpi_title">1. תמונת המצב</h2><p data-i18n="guide_kpi_text"></p></section>
+        <section class="integrated-guide-step"><h2 data-i18n="guide_filter_title">2. סינון וחיפוש</h2><p data-i18n="guide_filter_text"></p></section>
+        <section class="integrated-guide-step"><h2 data-i18n="guide_map_title">3. עבודה עם המפה</h2><p data-i18n="guide_map_text"></p></section>
+        <section class="integrated-guide-step"><h2 data-i18n="guide_chart_title">4. הגרפים</h2><p data-i18n="guide_chart_text"></p></section>
+        <section class="integrated-guide-step"><h2 data-i18n="guide_table_title">5. טבלת האירועים</h2><p data-i18n="guide_table_text"></p></section>
+        <section class="integrated-guide-step"><h2 data-i18n="guide_lang_title">6. שפה ורענון</h2><p data-i18n="guide_lang_text"></p></section>
       </div>
-      <button id="closeGuide" class="guide-close" type="button" aria-label="Close">×</button>
+      <div class="integrated-guide-tip" data-i18n="guide_tip"></div>
     </div>
-    <div class="guide-body">
-      <div class="guide-grid">
-        <section class="guide-step">
-          <h3 data-i18n="guide_kpi_title">1. תמונת המצב</h3>
-          <p data-i18n="guide_kpi_text">הכרטיסים העליונים מציגים את מספר האירועים, התוקף והיעד המרכזיים ואת שיעור האירועים הקשורים לבחירות או לישראל וליהודים. לחיצה על כרטיס פותחת את האירועים שמאחוריו.</p>
-        </section>
-        <section class="guide-step">
-          <h3 data-i18n="guide_filter_title">2. סינון וחיפוש</h3>
-          <p data-i18n="guide_filter_text">פתחו את "סינון וחיפוש" כדי לבחור טווח תאריכים, נושא, שימוש ב-AI, קשר לבחירות, קשר לישראל וליהודים, תחומים ופלטפורמות. אפשר גם לחפש בטקסט חופשי.</p>
-        </section>
-        <section class="guide-step">
-          <h3 data-i18n="guide_map_title">3. עבודה עם המפה</h3>
-          <p data-i18n="guide_map_text">המפה מציגה רק קשרים שניתן לזהות באופן ברור מתוך הנתונים: תוקף יחיד מול יעד אחד או כמה יעדים, או כמה תוקפים מול יעד יחיד. אירועים שיש בהם גם כמה תוקפים וגם כמה יעדים נשארים בתוצאות אך אינם מוצגים כחיצים. אפשר לבחור מדינה, לבחור כיוון פעילות וללחוץ על חץ כדי לראות את האירועים המתאימים.</p>
-        </section>
-        <section class="guide-step">
-          <h3 data-i18n="guide_chart_title">4. הגרפים</h3>
-          <p data-i18n="guide_chart_text">הגרפים מציגים את התחומים, הפלטפורמות, התוקפים והיעדים הבולטים. לחיצה על עמודה או פלח פותחת את האירועים המתאימים. אפשר גם לשמור גרף כתמונה.</p>
-        </section>
-        <section class="guide-step">
-          <h3 data-i18n="guide_table_title">5. טבלת האירועים</h3>
-          <p data-i18n="guide_table_text">בתחתית העמוד מופיעים כל האירועים שעונים לסינון הנוכחי, 50 אירועים בכל עמוד. השתמשו בכפתורי העמוד הקודם והעמוד הבא כדי לעבור ביניהם.</p>
-        </section>
-        <section class="guide-step">
-          <h3 data-i18n="guide_lang_title">6. שפה ורענון</h3>
-          <p data-i18n="guide_lang_text">אפשר לעבור בין עברית לאנגלית באמצעות HE ו-EN. הכפתור "רענן נתונים" טוען מחדש את המידע העדכני מהמאגר.</p>
-        </section>
-      </div>
-      <div class="guide-tip" data-i18n="guide_tip">טיפ: כמעט כל רכיב מרכזי בדשבורד הוא אינטראקטיבי. אם משהו נראה מעניין, נסו ללחוץ עליו כדי להגיע לרשומות שמאחוריו.</div>
-    </div>
-  </dialog>
+  </section>
+
+<div id="chartFullscreenBackdrop" class="chart-card-fullscreen-backdrop" aria-hidden="true"></div>
+  <div id="selectionToast" role="status" aria-live="polite">
+    <div class="selection-toast-text"><strong id="selectionToastTitle"></strong><span id="selectionToastSub"></span></div>
+    <div class="selection-toast-actions"><button id="selectionToastShow" class="primary" type="button">הצג אירועים</button><button id="selectionToastClose" type="button">סגור</button></div>
+  </div>
 
   <!-- Modal -->
   <dialog id="resultModal">
@@ -778,17 +908,18 @@
     refresh: { he: "רענן נתונים", en: "Refresh Data" },
     guide_button: { he: "📖 מדריך שימוש", en: "📖 User Guide" },
     guide_title: { he: "מדריך שימוש ב-FIMI MONITOR", en: "FIMI MONITOR User Guide" },
+    guide_back: { he: "← חזרה לדשבורד", en: "← Back to dashboard" },
     guide_intro: { he: "כך אפשר לעבור במהירות מתמונת המצב אל האירועים עצמם.", en: "Use the dashboard to move quickly from the overview to the underlying events." },
     guide_kpi_title: { he: "1. תמונת המצב", en: "1. Overview Cards" },
     guide_kpi_text: { he: "הכרטיסים העליונים מציגים את מספר האירועים, התוקף והיעד המרכזיים ואת שיעור האירועים הקשורים לבחירות או לישראל וליהודים. לחיצה על כרטיס פותחת את האירועים שמאחוריו.", en: "The top cards show the number of events, the leading actor and target, and the share related to elections or to Israel and Jewish communities. Click a card to open the events behind it." },
     guide_filter_title: { he: "2. סינון וחיפוש", en: "2. Filter & Search" },
     guide_filter_text: { he: "פתחו את \"סינון וחיפוש\" כדי לבחור טווח תאריכים, נושא, שימוש ב-AI, קשר לבחירות, קשר לישראל וליהודים, תחומים ופלטפורמות. אפשר גם לחפש בטקסט חופשי.", en: "Open Filter & Search to choose dates, topic, AI use, election relevance, Israel/Jewish relevance, domains and platforms. You can also use free-text search." },
     guide_map_title: { he: "3. עבודה עם המפה", en: "3. Using the Map" },
-    guide_map_text: { he: "המפה מציגה רק קשרים שניתן לזהות באופן ברור מתוך הנתונים: תוקף יחיד מול יעד אחד או כמה יעדים, או כמה תוקפים מול יעד יחיד. אירועים שיש בהם גם כמה תוקפים וגם כמה יעדים נשארים בתוצאות אך אינם מוצגים כחיצים. אפשר לבחור מדינה, לבחור כיוון פעילות וללחוץ על חץ כדי לראות את האירועים המתאימים.", en: "The map shows only relationships that can be identified clearly from the data: one actor to one or several targets, or several actors to one target. Cases with both multiple actors and multiple targets remain in the results but are not drawn as arrows. Select a country and direction, then click an arrow to see the matching events." },
+    guide_map_text: { he: "המפה מציגה קשרים שניתן לזהות באופן ברור בין תוקפים ליעדים. אפשר לבחור מדינה וכיוון פעילות, ללחוץ על חץ כדי לפתוח את האירועים המתאימים, או לעבור לתצוגת קשרים שמציגה את אותם קשרים כטבלה קומפקטית.", en: "The map shows clearly identifiable actor-to-target relationships. Select a country and direction, click an arrow to open matching events, or switch to Connections for the same relationships in a compact table." },
     guide_chart_title: { he: "4. הגרפים", en: "4. Charts" },
-    guide_chart_text: { he: "הגרפים מציגים את התחומים, הפלטפורמות, התוקפים והיעדים הבולטים. לחיצה על עמודה או פלח פותחת את האירועים המתאימים. אפשר גם לשמור גרף כתמונה.", en: "The charts highlight leading domains, platforms, actors and targets. Click a bar or slice to open the matching events. Charts can also be saved as images." },
+    guide_chart_text: { he: "הגרפים מציגים את התחומים, הפלטפורמות, התוקפים והיעדים הבולטים. בכל גרף אפשר לעבור בין גרף לטבלת נתונים באמצעות 📋. לחיצה על ערך מסננת ומאפשרת לפתוח את האירועים המתאימים. במחשב אפשר גם לפתוח תרשים במסך מלא.", en: "Charts highlight leading domains, platforms, actors and targets. Use 📋 to switch between chart and data-table views. Click a value to filter and open matching events. On desktop, charts can also be opened fullscreen." },
     guide_table_title: { he: "5. טבלת האירועים", en: "5. Events Table" },
-    guide_table_text: { he: "בתחתית העמוד מופיעים כל האירועים שעונים לסינון הנוכחי, 50 אירועים בכל עמוד. השתמשו בכפתורי העמוד הקודם והעמוד הבא כדי לעבור ביניהם.", en: "At the bottom of the page, all events matching the current filters are shown, 50 per page. Use Previous and Next to move between pages." },
+    guide_table_text: { he: "בתחתית העמוד מופיעים האירועים המתאימים לסינון, 25 בכל עמוד. כל רשומה מתחילה בתאריך ובכותרת כדי לחסוך מקום. לחצו על ‘פרטים נוספים’ כדי לפתוח את כל המטא-דאטה, או על ‘שיתוף’ כדי לשתף את האירוע.", en: "At the bottom of the page, matching events are shown 25 per page. Each record starts with its date and title to save space. Use More details to expand the metadata or Share to share the event." },
     guide_lang_title: { he: "6. שפה ורענון", en: "6. Language & Refresh" },
     guide_lang_text: { he: "אפשר לעבור בין עברית לאנגלית באמצעות HE ו-EN. הכפתור \"רענן נתונים\" טוען מחדש את המידע העדכני מהמאגר.", en: "Switch between Hebrew and English using HE and EN. Refresh Data reloads the latest information from the database." },
     guide_tip: { he: "טיפ: כמעט כל רכיב מרכזי בדשבורד הוא אינטראקטיבי. אם משהו נראה מעניין, נסו ללחוץ עליו כדי להגיע לרשומות שמאחוריו.", en: "Tip: almost every major dashboard element is interactive. If something looks interesting, click it to open the underlying records." },
@@ -870,6 +1001,10 @@
     search_res: { he: "חיפוש בתוצאות…", en: "Search results…" },
     export_csv: { he: "יצוא CSV", en: "Export CSV" },
     export_filtered: { he: "יצוא התוצאות", en: "Export Results" },
+    share_record: { he: "שתף", en: "Share" },
+    copy_record: { he: "העתקת שיתוף", en: "Copy share text" },
+    more_details: { he: "פרטים נוספים ▾", en: "More details ▾" },
+    hide_details: { he: "הסתר פרטים ▲", en: "Hide details ▲" },
     all_current_results: { he: "כל התוצאות המוצגות", en: "All Current Results" },
     election_results: { he: "אירועים הקשורים לבחירות", en: "Election-related Events" },
     israel_results: { he: "אירועים הקשורים לישראל וליהודים", en: "Israel / Jewish-related Events" },
@@ -974,7 +1109,7 @@
     'לא מדינתי': 'Non-State'
   };
 
-  let currentLang = 'he';
+  let currentLang = 'en';
 
   function t(key, params={}) {
     let str = (UI[key] && UI[key][currentLang]) || key;
@@ -1041,6 +1176,10 @@
     
     document.getElementById('langHeBtn').classList.toggle('active', currentLang === 'he');
     document.getElementById('langEnBtn').classList.toggle('active', currentLang === 'en');
+    const guideHe=document.getElementById('guideLangHeBtn');
+    const guideEn=document.getElementById('guideLangEnBtn');
+    if(guideHe) guideHe.classList.toggle('active', currentLang === 'he');
+    if(guideEn) guideEn.classList.toggle('active', currentLang === 'en');
   }
 
   function setLanguage(lang) {
@@ -1064,6 +1203,27 @@
 
   document.getElementById('langHeBtn').addEventListener('click', () => setLanguage('he'));
   document.getElementById('langEnBtn').addEventListener('click', () => setLanguage('en'));
+
+
+  function openIntegratedGuide(){
+    const page=document.getElementById('guidePage');
+    if(!page) return;
+    document.body.classList.add('guide-mode');
+    page.setAttribute('aria-hidden','false');
+    window.scrollTo({top:0,behavior:'auto'});
+    document.title=currentLang==='en'?'FIMI MONITOR | User Guide':'FIMI MONITOR | מדריך שימוש';
+  }
+  function closeIntegratedGuide(){
+    const page=document.getElementById('guidePage');
+    document.body.classList.remove('guide-mode');
+    if(page) page.setAttribute('aria-hidden','true');
+    window.scrollTo({top:0,behavior:'auto'});
+    updateStaticUIText();
+  }
+  document.getElementById('guideBtn')?.addEventListener('click',openIntegratedGuide);
+  document.getElementById('guideBackBtn')?.addEventListener('click',closeIntegratedGuide);
+  document.getElementById('guideLangHeBtn')?.addEventListener('click',()=>setLanguage('he'));
+  document.getElementById('guideLangEnBtn')?.addEventListener('click',()=>setLanguage('en'));
 
   // ========= CONFIG =========
   const WEBAPP_URL = 'https://script.google.com/macros/s/AKfycbwZzR2pIBVys2lNSq8OZJowtuIhDRJMvuPPBklCu7N_VWeHEaAbNjbl7Qm-a2K2q_LI/exec';
@@ -1199,6 +1359,11 @@
     return v;
   }
 
+  function isHiddenPlatform(value){
+    const v=String(value||'').replace(/[\u200f\u200e]/g,'').trim().toLowerCase();
+    return v==='אחר' || v==='other';
+  }
+
   function normalizeRowsFromJson(rows){
     const out = [];
     for(const r of rows){
@@ -1254,7 +1419,7 @@
     for(const r of rows){
       if(r.chapter) distincts.chapters.add(r.chapter);
       for(const d of r.domains) distincts.domains.add(d);
-      for(const p of r.platforms) distincts.platforms.add(p);
+      for(const p of r.platforms){ if(!isHiddenPlatform(p)) distincts.platforms.add(p); }
     }
   }
 
@@ -1379,6 +1544,63 @@
   };
   const PIE_PALETTE = { yes:'#F9773E', no:'#D6B8F9', other:'#CEED7C' };
 
+
+  let pendingChartSelection=null;
+  let toastTimer=null;
+  function showChartSelection(chartKey,label){
+    const idxSet=chartBuckets[chartKey]?.get(label);
+    const count=idxSet?.size||0;
+    pendingChartSelection={chartKey,label};
+    document.getElementById('selectionToastTitle').textContent=`${translateValue(label)}`;
+    document.getElementById('selectionToastSub').textContent=currentLang==='en'?`${fmtNum(count)} matching events`:`${fmtNum(count)} אירועים מתאימים`;
+    document.getElementById('selectionToastShow').textContent=currentLang==='en'?'Show events':'הצג אירועים';
+    document.getElementById('selectionToastClose').textContent=currentLang==='en'?'Close':'סגור';
+    const toast=document.getElementById('selectionToast');
+    toast.classList.add('open');
+    clearTimeout(toastTimer); toastTimer=setTimeout(()=>toast.classList.remove('open'),7000);
+  }
+  function closeSelectionToast(){document.getElementById('selectionToast')?.classList.remove('open')}
+  function ensureChartExplorer(key,type,rawLabels,data){
+    const canvas=document.getElementById(key),card=document.getElementById(`card-${key}`);
+    if(!canvas||!card)return;
+    let holder=canvas.parentElement;
+    holder.classList.add('chart-visual-wrap');
+    let table=card.querySelector('.chart-data-table');
+    if(!table){table=document.createElement('div');table.className='chart-data-table';holder.insertAdjacentElement('afterend',table)}
+    const total=data.reduce((s,v)=>s+v,0);
+    table.innerHTML=`<div class="chart-data-row head"><span>${currentLang==='en'?'Category':'קטגוריה'}</span><span>${currentLang==='en'?'Events':'אירועים'}</span><span>%</span></div>`+rawLabels.map((label,i)=>`<div class="chart-data-row" data-chart-label="${escapeHtml(String(label))}"><span class="chart-data-label">${escapeHtml(translateValue(label))}</span><span class="chart-data-value">${fmtNum(data[i]||0)}</span><span class="chart-data-pct">${total?Math.round((data[i]||0)/total*100):0}%</span></div>`).join('');
+    table.querySelectorAll('.chart-data-row[data-chart-label]').forEach(row=>row.addEventListener('click',()=>showChartSelection(key,row.dataset.chartLabel)));
+    const header=card.querySelector('.flex.items-center.justify-between.mb-2');
+    let tools=header?.querySelector('.chart-tools');
+    if(header&&!tools){
+      tools=document.createElement('div');tools.className='chart-tools';
+      const save=header.querySelector('.btn-save'); if(save){save.parentElement?.classList.add('chart-tools');tools=save.parentElement}
+    }
+    if(tools&&!tools.querySelector('.table-toggle-btn')){
+      const b=document.createElement('button');b.type='button';b.className='chart-tool-btn table-toggle-btn';b.textContent='📋';b.title=currentLang==='en'?'Table view':'הצגה כטבלה';
+      b.addEventListener('click',()=>toggleChartTable(key,b)); tools.prepend(b);
+      const f=document.createElement('button');f.type='button';f.className='chart-tool-btn fullscreen-toggle-btn';f.textContent='⛶';f.title=currentLang==='en'?'Fullscreen':'מסך מלא';f.addEventListener('click',()=>toggleChartFullscreen(key,f));tools.appendChild(f);
+    }
+    if(window.matchMedia('(max-width:700px)').matches && type==='bar' && !card.dataset.mobileDefaultApplied){
+      card.dataset.mobileDefaultApplied='1';
+      const b=tools?.querySelector('.table-toggle-btn'); toggleChartTable(key,b,true);
+    }
+  }
+  function toggleChartTable(key,btn,forceOn=false){
+    const card=document.getElementById(`card-${key}`),canvas=document.getElementById(key);if(!card||!canvas)return;
+    const table=card.querySelector('.chart-data-table'),holder=canvas.parentElement;
+    const show=forceOn||!table.classList.contains('active');
+    table.classList.toggle('active',show);holder.style.display=show?'none':'';btn?.classList.toggle('active',show);btn&&(btn.textContent=show?'📊':'📋');
+    if(!show&&charts[key])setTimeout(()=>charts[key].resize(),20);
+  }
+  function toggleChartFullscreen(key,btn){
+    const card=document.getElementById(`card-${key}`),backdrop=document.getElementById('chartFullscreenBackdrop');if(!card)return;
+    const open=!card.classList.contains('chart-fullscreen');
+    document.querySelectorAll('.chart-fullscreen').forEach(c=>c.classList.remove('chart-fullscreen'));
+    card.classList.toggle('chart-fullscreen',open);backdrop.classList.toggle('open',open);document.body.style.overflow=open?'hidden':'';btn.textContent=open?'✕':'⛶';
+    if(charts[key])setTimeout(()=>charts[key].resize(),50);
+  }
+
   function renderOrUpdateChart(key, type, rawLabels, data){
     const el = document.getElementById(key);
     if(!el) return;
@@ -1433,37 +1655,38 @@
             color: '#303030',
             font:(ctx)=> type==='doughnut' ? {size:11, weight:'700', lineHeight:1.05} : {size:12, weight:'700'},
             anchor: type==='doughnut' ? 'center' : 'end',
-            align:  type==='doughnut' ? 'center' : 'top',
-            offset: type==='doughnut' ? 0 : 4,
+            align:  type==='doughnut' ? 'center' : 'right',
+            offset: type==='doughnut' ? 0 : 5,
             clamp: type==='doughnut',
             clip:false,
             textAlign:'center'
           }
         },
+        indexAxis: type==='bar' ? 'y' : 'x',
         scales: (type==='bar') ? {
           x: {
-            ticks:{autoSkip:false, color:'#303030', font:{size:12, weight:'700'}},
-            grid:{display:false},
-            border:{display:false}
-          },
-          y: {
             beginAtZero:true,
             display:false,
             grid:{display:false},
             border:{display:false},
-            suggestedMax: maxv ? Math.ceil(maxv*1.18) : undefined
+            suggestedMax: maxv ? Math.ceil(maxv*1.22) : undefined
+          },
+          y: {
+            ticks:{autoSkip:false, color:'#303030', font:{size:isMobileChart?11:12, weight:'700'}, padding:6},
+            grid:{display:false},
+            border:{display:false}
           }
         } : {}
       },
       plugins: [ChartDataLabels]
     });
 
+    ensureChartExplorer(key, type, rawLabels, data);
     el.onclick = (evt)=>{
-      const points = charts[key].getElementsAtEventForMode(evt, type==='doughnut' ? 'nearest' : 'index', {intersect:true}, true);
+      const points = charts[key].getElementsAtEventForMode(evt, 'nearest', {intersect:true}, true);
       if(!points.length) return;
       const idx = points[0].index;
-      const label = rawLabels[idx]; // original logic
-      openResultModal(key, label);
+      showChartSelection(key, rawLabels[idx]);
     };
   }
 
@@ -1500,17 +1723,15 @@
     const platMap = new Map();
     rows.forEach((r,i)=>{
       r.platforms.forEach(p=>{
+        if(isHiddenPlatform(p)) return;
         if(!platMap.has(p)) platMap.set(p, []);
         platMap.get(p).push(i);
       });
     });
-    const {entries:platEntries, topSet:platTop, otherKeys:platOther, otherLabel:platOtherLabel} = topWithRule(new Map([...platMap.entries()].map(([k,v])=>[k,v.length])), 'פלטפורמות נוספות');
-    chartTopSets.platformChart = platTop;
-    platEntries.forEach(([k])=>{
-      if(k===platOtherLabel){
-        chartBuckets.platformChart.set(k, new Set(platOther.flatMap(key=>platMap.get(key)||[])));
-      }else{ chartBuckets.platformChart.set(k, new Set(platMap.get(k)||[])); }
-    });
+    const platSorted=[...platMap.entries()].map(([k,v])=>[k,v.length]).sort((a,b)=>b[1]-a[1]);
+    const platEntries=platSorted.slice(0,7);
+    chartTopSets.platformChart = new Set(platEntries.map(([k])=>k));
+    platEntries.forEach(([k])=>{ chartBuckets.platformChart.set(k, new Set(platMap.get(k)||[])); });
 
 
     const electMap = new Map();
@@ -1702,8 +1923,8 @@
     const d2 = dataFromEntries(domainEntries);
     renderOrUpdateChart('domainChart','bar', d2.labels, d2.data);
 
-    const platformMap = tally(rows.flatMap(r=>r.platforms));
-    const {entries:platformEntries} = topWithRule(platformMap, 'פלטפורמות נוספות');
+    const platformMap = tally(rows.flatMap(r=>r.platforms).filter(p=>!isHiddenPlatform(p)));
+    const platformEntries = [...platformMap.entries()].sort((a,b)=>b[1]-a[1]).slice(0,7);
     const d3 = dataFromEntries(platformEntries);
     renderOrUpdateChart('platformChart','bar', d3.labels, d3.data);
 
@@ -1765,7 +1986,7 @@
   const MAP_RESULTS_PAGE_SIZE = 100;
   let quickTableRows = [];
   let quickTablePage = 1;
-  const QUICK_TABLE_PAGE_SIZE = 50;
+  const QUICK_TABLE_PAGE_SIZE = 25;
 
   function canonicalCountry(raw){
     const cleaned = String(raw || '').replace(/[\u200f\u200e]/g,'').trim();
@@ -1972,12 +2193,44 @@
     return '#AAB6C4';
   }
 
+
+  let mapRelationshipRows=[];
+  function ensureMapExplorer(){
+    const card=document.getElementById('card-flowMap');if(!card)return;
+    if(!card.querySelector('.map-view-tools')){
+      const head=card.querySelector(':scope > .flex.flex-col');
+      const tools=document.createElement('div');tools.className='map-view-tools';
+      tools.innerHTML=`<button type="button" class="map-view-btn active" data-map-view="map">🗺️ ${currentLang==='en'?'Map':'מפה'}</button><button type="button" class="map-view-btn" data-map-view="relations">📋 ${currentLang==='en'?'Connections':'קשרים'}</button>`;
+      (head||card).appendChild(tools);
+      tools.querySelectorAll('.map-view-btn').forEach(b=>b.addEventListener('click',()=>setMapView(b.dataset.mapView)));
+    }
+    if(!card.querySelector('.map-relations-wrap')){
+      const wrap=document.createElement('div');wrap.className='map-relations-wrap';wrap.innerHTML=`<table><thead><tr><th>${currentLang==='en'?'Actor':'תוקף'}</th><th>${currentLang==='en'?'Target':'יעד'}</th><th>${currentLang==='en'?'Events':'אירועים'}</th></tr></thead><tbody id="mapRelationsBody"></tbody></table>`;
+      card.querySelector('.map-wrap')?.insertAdjacentElement('afterend',wrap);
+    }
+  }
+  function setMapView(view){
+    const card=document.getElementById('card-flowMap');if(!card)return;
+    const isTable=view==='relations'; card.querySelector('.map-wrap').style.display=isTable?'none':''; card.querySelector('.map-relations-wrap')?.classList.toggle('active',isTable);
+    card.querySelectorAll('.map-view-btn').forEach(b=>b.classList.toggle('active',b.dataset.mapView===view));
+    if(!isTable&&mapReady)setTimeout(()=>drawFlows(),30);
+  }
+  function renderMapRelationsTable(flows){
+    ensureMapExplorer(); mapRelationshipRows=[...flows].sort((a,b)=>(b.count||1)-(a.count||1));
+    const body=document.getElementById('mapRelationsBody');if(!body)return;
+    body.innerHTML=mapRelationshipRows.map((f,i)=>`<tr data-flow-index="${i}"><td data-label="${currentLang==='en'?'Actor':'תוקף'}">${escapeHtml(translateValue(f.from))}</td><td data-label="${currentLang==='en'?'Target':'יעד'}">${escapeHtml(translateValue(f.to))}</td><td class="map-relations-count">${fmtNum(f.count||1)}</td></tr>`).join('');
+    body.querySelectorAll('tr[data-flow-index]').forEach(tr=>tr.addEventListener('click',()=>{
+      const f=mapRelationshipRows[Number(tr.dataset.flowIndex)];if(!f)return;const indexes=new Set((f.events||[{rowIndex:f.rowIndex}]).map(e=>e.rowIndex));const rows=[...indexes].map(i=>currentMapRows[i]).filter(Boolean);openRowsModal(`${translateValue(f.from)} → ${translateValue(f.to)}`,rows);
+    }));
+  }
+
   function drawFlows(){
     if(!mapReady) return;
     mapRoot.selectAll('.flows-layer').remove();
     const aggregate=document.getElementById('mapAggregate').checked;
     const allFlows=buildFlowPairs(currentMapRows,aggregate);
     let flows=filterMapFlows(allFlows);
+    renderMapRelationsTable(flows);
     const mobileMapView=window.matchMedia('(max-width: 700px)').matches;
     const activeCountry=document.getElementById('mapCountryFilter').value;
     if(mobileMapView && !activeCountry && flows.length>18){
@@ -2174,6 +2427,42 @@
     document.getElementById('quickTableNextPage').disabled = quickTablePage >= totalPages;
   }
 
+  function isMobileDevice(){ return /Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent); }
+
+  function shareEvent(event, rowIndex){
+    const r=quickTableRows[rowIndex];
+    if(!r) return;
+    const title=displayTitle(r);
+    const lines=[`📌 ${currentLang==='en'?'From FIMI MONITOR':'מתוך FIMI MONITOR'}`,''];
+    if(title) lines.push(`"${title}"`,'');
+    lines.push(`🗓️ ${currentLang==='en'?'Date':'תאריך'}: ${fmtYMD(r.date)}`);
+    if((r.attackers||[]).length) lines.push(`🗣️ ${currentLang==='en'?'Actor':'תוקף'}: ${(r.attackers||[]).map(translateValue).join(', ')}`);
+    if((r.targets||[]).length) lines.push(`🎯 ${currentLang==='en'?'Target':'יעד'}: ${(r.targets||[]).map(translateValue).join(', ')}`);
+    if((r.platforms||[]).length) lines.push(`📢 ${currentLang==='en'?'Platform':'פלטפורמה'}: ${(r.platforms||[]).filter(p=>!isHiddenPlatform(p)).map(translateValue).join(', ')}`);
+    if(r.link) lines.push('',`🔗 ${currentLang==='en'?'Source':'מקור'}: ${r.link}`);
+    lines.push('',`📊 FIMI MONITOR: ${window.location.href.split('#')[0]}`);
+    const rawText=lines.join('\n');
+    const btn=event&&event.currentTarget;
+    if(isMobileDevice()){
+      window.open(`https://wa.me/?text=${encodeURIComponent(rawText)}`,'_blank');
+      return;
+    }
+    const restore=btn?btn.textContent:'';
+    const done=ok=>{ if(!btn)return; btn.textContent=ok?'✔ הועתק':'✕ שגיאה'; setTimeout(()=>btn.textContent=restore,1600); };
+    if(navigator.clipboard&&navigator.clipboard.writeText){ navigator.clipboard.writeText(rawText).then(()=>done(true)).catch(()=>done(false)); }
+    else{
+      try{ const ta=document.createElement('textarea'); ta.value=rawText; ta.style.position='fixed'; ta.style.opacity='0'; document.body.appendChild(ta); ta.select(); document.execCommand('copy'); ta.remove(); done(true); }catch(err){done(false)}
+    }
+  }
+
+  function toggleEventDetails(btn){
+    const main=btn.closest('tr');
+    const details=main?main.nextElementSibling:null;
+    if(!details) return;
+    const open=details.classList.toggle('open');
+    btn.textContent=open?t('hide_details'):t('more_details');
+  }
+
   function updateTable(rows){
     const tbody = document.getElementById('tableBody');
     if(!tbody) return;
@@ -2184,22 +2473,35 @@
     const start = (quickTablePage - 1) * QUICK_TABLE_PAGE_SIZE;
     const slice = quickTableRows.slice(start, start + QUICK_TABLE_PAGE_SIZE);
     tbody.innerHTML='';
-    for(const r of slice){
-      const tr = document.createElement('tr');
-      tr.className="border-b";
-      const dispTitle = escapeHtml(displayTitle(r));
-      const safeLink = safeUrl(r.link);
-      tr.innerHTML = `
-        <td class="p-2 evt-date">${fmtYMD(r.date)}</td>
-        <td class="p-2 evt-title">${safeLink ? `<a class="title-link" href="${safeLink}" target="_blank" rel="noopener">${dispTitle} ↗</a>` : dispTitle}</td>
-        <td class="p-2 evt-actor">${escapeHtml((r.attackers||[]).map(translateValue).join(', '))}</td>
-        <td class="p-2 evt-target">${escapeHtml((r.targets||[]).map(translateValue).join(', '))}</td>
-        <td class="p-2 evt-platforms">${escapeHtml(r.platforms.map(translateValue).join(', '))}</td>
-        <td class="p-2 evt-ai">${escapeHtml(translateValue(r.ai)||t('not_identified'))}</td>
-        <td class="p-2 evt-elections">${escapeHtml(translateValue(r.elections)||t('not_identified'))}</td>
-      `;
-      tbody.appendChild(tr);
-    }
+    slice.forEach((r,localIndex)=>{
+      const realIndex=start+localIndex;
+      const dispTitle=escapeHtml(displayTitle(r));
+      const safeLink=safeUrl(r.link);
+      const main=document.createElement('tr');
+      main.className='evt-main-row border-b';
+      main.innerHTML=`
+        <td class="p-2 evt-main-date">${fmtYMD(r.date)}</td>
+        <td class="p-2 evt-main-title">${safeLink?`<a class="title-link" href="${safeLink}" target="_blank" rel="noopener">${dispTitle} ↗</a>`:dispTitle}</td>
+        <td class="p-2 evt-main-actions"><div class="evt-action-stack">
+          <button type="button" class="evt-share-btn" onclick="shareEvent(event,${realIndex})">${isMobileDevice()?'🟢 '+t('share_record'):t('copy_record')}</button>
+          <button type="button" class="evt-details-btn" onclick="toggleEventDetails(this)">${t('more_details')}</button>
+        </div></td>`;
+      const details=document.createElement('tr');
+      details.className='evt-details-row';
+      const platforms=(r.platforms||[]).filter(p=>!isHiddenPlatform(p)).map(translateValue).join(', ')||'-';
+      details.innerHTML=`<td colspan="3"><div class="evt-detail-grid">
+        <div><strong>${t('th_actor_modal')}</strong>${escapeHtml((r.attackers||[]).map(translateValue).join(', ')||'-')}</div>
+        <div><strong>${t('th_target_modal')}</strong>${escapeHtml((r.targets||[]).map(translateValue).join(', ')||'-')}</div>
+        <div><strong>${t('th_platforms')}</strong>${escapeHtml(platforms)}</div>
+        <div><strong>${t('th_topic')}</strong>${escapeHtml(translateValue(r.chapter)||'-')}</div>
+        <div><strong>AI</strong>${escapeHtml(translateValue(r.ai)||t('not_identified'))}</div>
+        <div><strong>${t('th_elections')}</strong>${escapeHtml(translateValue(r.elections)||t('not_identified'))}</div>
+        <div><strong>${currentLang==='en'?'Israel / Jewish-related':'קשר לישראל וליהודים'}</strong>${escapeHtml(translateValue(r.israel)||t('not_identified'))}</div>
+        ${safeLink?`<div class="wide"><strong>${t('th_link')}</strong><a class="title-link" href="${safeLink}" target="_blank" rel="noopener">${safeLink}</a></div>`:''}
+      </div></td>`;
+      tbody.appendChild(main);
+      tbody.appendChild(details);
+    });
     updateQuickTablePager();
   }
 
@@ -2312,20 +2614,10 @@
   });
   document.getElementById('reloadBtn').addEventListener('click', loadData);
 
-  const guideDialog = document.getElementById('guideDialog');
-  document.getElementById('guideBtn').addEventListener('click', ()=>{
-    guideDialog.showModal();
-    document.documentElement.classList.add('guide-open');
-    guideDialog.scrollTop=0;
-    const guideBody=guideDialog.querySelector('.guide-body');
-    if(guideBody) guideBody.scrollTop=0;
-    requestAnimationFrame(()=>{ guideDialog.scrollTop=0; });
-  });
-  document.getElementById('closeGuide').addEventListener('click', ()=>guideDialog.close());
-  guideDialog.addEventListener('close',()=>document.documentElement.classList.remove('guide-open'));
-  guideDialog.addEventListener('click', (event)=>{
-    if(event.target === guideDialog) guideDialog.close();
-  });
+
+  document.getElementById('selectionToastShow')?.addEventListener('click',()=>{if(pendingChartSelection){openResultModal(pendingChartSelection.chartKey,pendingChartSelection.label)}closeSelectionToast()});
+  document.getElementById('selectionToastClose')?.addEventListener('click',closeSelectionToast);
+  document.getElementById('chartFullscreenBackdrop')?.addEventListener('click',()=>{document.querySelectorAll('.card.chart-fullscreen').forEach(c=>c.classList.remove('chart-fullscreen'));document.getElementById('chartFullscreenBackdrop').classList.remove('open');document.body.style.overflow='';Object.values(charts).forEach(ch=>setTimeout(()=>ch.resize(),0))});
 
   const toggleBtn = document.getElementById('toggleFiltersBtn');
   const filtersWrap = document.getElementById('filtersWrap');
