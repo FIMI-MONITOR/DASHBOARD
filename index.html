@@ -1076,13 +1076,6 @@
     'תעמולה': 'Propaganda',
     'אנטישמיות': 'Antisemitism',
     'דה-לגיטימציה': 'Delegitimization',
-    'מקומי': 'Local',
-    'מקומי - ישראל': 'Local - Israel',
-    'מקומי-ישראל': 'Local - Israel',
-    'גלובלי': 'Global',
-    'אזורי': 'Regional',
-    'בינלאומי - ישראל': 'International - Israel',
-
     
     // Platforms
     'טוויטר': 'Twitter',
@@ -1107,14 +1100,6 @@
     'רשתות חברתיות': 'Social Media',
     'תקשורת ממסדית': 'Mainstream Media',
     'עיתונות': 'Press',
-    'צ\'אט בוטים': 'Chatbots',
-    'צ׳אט בוטים': 'Chatbots',
-    'צאט בוטים': 'Chatbots',
-    'בוטים': 'Bots',
-    'אתרי חדשות': 'News Websites',
-    'אפליקציות מסרים': 'Messaging Apps',
-    'מסרים מיידיים': 'Instant Messaging',
-
     
     // Misc
     'כן': 'Yes', 'לא': 'No',
@@ -1140,40 +1125,13 @@
     if (!val) return val;
     const v = String(val).trim();
     if (currentLang === 'en') {
-      if (VALUES[v]) return VALUES[v];
-
-      // Translate simple compound taxonomy values when every component is known.
-      const parts = v.split(/\s+-\s+/);
-      if(parts.length > 1){
-        const translated = parts.map(part => VALUES[part] || part);
-        if(translated.every((part,i) => part !== parts[i] || !containsHebrew(parts[i]))){
-          return translated.join(' - ');
-        }
-      }
-      return v;
+      return VALUES[v] || v;
     }
     return v;
   }
 
-  const TITLE_TRANSLATIONS = {
-    'ראיון עם ממלא מקום מנכ״ל ועדת הבחירות המרכזית': 'Interview with the Acting Director General of the Central Elections Committee',
-    'ראיון עם ממלא מקום מנכ"ל ועדת הבחירות המרכזית': 'Interview with the Acting Director General of the Central Elections Committee'
-  };
-
-  function containsHebrew(value){
-    return /[\u0590-\u05FF]/.test(String(value || ''));
-  }
-
   function displayTitle(row) {
-    if (currentLang === 'en') {
-      const en = String(row.title_en || '').trim();
-      if(en && !containsHebrew(en)) return en;
-
-      const translated = String(row.title_en_translated || '').trim();
-      if(translated) return translated;
-
-      return 'View source item';
-    }
+    if (currentLang === 'en') return row.title_en || row.title_he || '';
     return row.title_he || row.title_en || '';
   }
 
@@ -1311,8 +1269,8 @@
 
   const KEYMAP = {
     date:       ['תאריך','date','Date'],
-    title_en:   ['כותרת באנגלית','English title','English Title','Title English','Title_en','title_en','title','Title'],
-    title_he:   ['כותרת בעברית','title_he','Title_he','כותרת'],
+    title_en:   ['כותרת באנגלית','English title','English Title','Title English','Title_en','title_en','title','Title','כותרת'],
+    title_he:   ['כותרת בעברית','title_he','Title_he'],
     summary_en: ['תיאור קצר','summary_en','Summary'],
     summary_he: ['תרגום לעברית','summary_he','Translation_he'],
     attacker:   ['הגוף התוקף','attacker','Attacker'],
@@ -2561,49 +2519,6 @@
     return new Promise(resolve=>setTimeout(resolve,ms));
   }
 
-
-  async function translateHebrewTitleToEnglish(title){
-    const raw = String(title || '').trim();
-    if(!raw || !containsHebrew(raw)) return raw;
-    if(TITLE_TRANSLATIONS[raw]) return TITLE_TRANSLATIONS[raw];
-
-    try{
-      const endpoint = 'https://translate.googleapis.com/translate_a/single'
-        + '?client=gtx&sl=iw&tl=en&dt=t&q=' + encodeURIComponent(raw);
-      const resp = await fetch(endpoint, {method:'GET', mode:'cors'});
-      if(!resp.ok) throw new Error(`Translation request failed (${resp.status})`);
-      const data = await resp.json();
-      const translated = Array.isArray(data?.[0])
-        ? data[0].map(part => Array.isArray(part) ? (part[0] || '') : '').join('').trim()
-        : '';
-      return translated || '';
-    }catch(err){
-      console.warn('Automatic title translation failed:', raw, err);
-      return '';
-    }
-  }
-
-  async function translateHebrewEnglishTitles(rows){
-    const unique = [...new Set(
-      rows.map(r => String(r.title_en || '').trim())
-          .filter(v => v && containsHebrew(v))
-    )];
-
-    if(!unique.length) return;
-
-    const translatedPairs = await Promise.all(
-      unique.map(async title => [title, await translateHebrewTitleToEnglish(title)])
-    );
-    const map = new Map(translatedPairs);
-
-    rows.forEach(r => {
-      const raw = String(r.title_en || '').trim();
-      if(raw && containsHebrew(raw)){
-        r.title_en_translated = map.get(raw) || '';
-      }
-    });
-  }
-
   async function fetchJSON(timeoutMs=15000){
     const controller = new AbortController();
     const timeout = setTimeout(()=>controller.abort(), timeoutMs);
@@ -2642,7 +2557,6 @@
     try{
       const rows = await fetchJSONWithRetry();
       normRows = normalizeRowsFromJson(rows);
-      await translateHebrewEnglishTitles(normRows);
       collectDistincts(normRows);
       populateFilters();
       applyAll();
